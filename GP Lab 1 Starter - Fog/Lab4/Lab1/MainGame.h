@@ -32,6 +32,7 @@ private:
 	Mesh mesh1;
 	Mesh mesh2;
 	Camera myCamera;
+	Shader fog;
 	//Audio audioDevice;
 
 	float counter;

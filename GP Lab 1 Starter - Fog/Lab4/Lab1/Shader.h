@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <GL\glew.h>
+#include <iostream>
 #include "transform.h"
 #include "Camera.h"
 

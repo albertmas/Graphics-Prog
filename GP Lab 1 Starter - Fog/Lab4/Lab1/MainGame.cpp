@@ -12,7 +12,7 @@ MainGame::MainGame()
 	Display* _gameDisplay = new Display(); //new display
     Mesh* mesh1();
 	Mesh* mesh2();
-	Shader fog;
+	Shader fog();
 	//Audio* audioDevice();
 }
 
@@ -34,6 +34,7 @@ void MainGame::initSystems()
 	
 	mesh1.loadModel("..\\res\\monkey3.obj");
 	mesh2.loadModel("..\\res\\monkey3.obj");
+	fog.Init("..\\res\\fog");
 	
 	myCamera.initCamera(glm::vec3(0, 0, -5), 70.0f, (float)_gameDisplay.getWidth()/_gameDisplay.getHeight(), 0.01f, 1000.0f);
 
@@ -106,7 +107,6 @@ void MainGame::drawGame()
 {
 	_gameDisplay.clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
 	
-	Shader shader("..\\res\\shader"); //new shader
 	Texture texture("..\\res\\bricks.jpg"); //load texture
 	Texture texture1("..\\res\\water.jpg"); //load texture
 	
@@ -114,8 +114,8 @@ void MainGame::drawGame()
 	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
-	shader.Bind();
-	shader.Update(transform, myCamera);
+	fog.Bind();
+	fog.Update(transform, myCamera);
 	texture.Bind(0);
 	mesh1.draw();
 	mesh1.updateSphereData(*transform.GetPos(), 0.62f);
@@ -125,8 +125,6 @@ void MainGame::drawGame()
 	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
-	shader.Bind();
-	shader.Update(transform, myCamera);
 	texture.Bind(0);
 	mesh2.draw();
 	mesh2.updateSphereData(*transform.GetPos(), 0.62f);

@@ -7,8 +7,12 @@ Shader::Shader() {}
 void Shader::Init(const std::string& filename)
 {
 	program = glCreateProgram(); // create shader program (openGL saves as ref number)
-	shaders[0] = CreateShader(LoadShader("..\\res\\shader.vert"), GL_VERTEX_SHADER); // create vertex shader
-	shaders[1] = CreateShader(LoadShader("..\\res\\shader.frag"), GL_FRAGMENT_SHADER); // create fragment shader
+	
+	std::string aux = filename + ".vert"; //"..\\res\\shader.vert"
+	shaders[0] = CreateShader(LoadShader(aux), GL_VERTEX_SHADER); // create vertex shader
+
+	aux = filename + ".frag";//"..\\res\\shader.frag"
+	shaders[1] = CreateShader(LoadShader(aux), GL_FRAGMENT_SHADER); // create fragment shader
 
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 	{
@@ -16,7 +20,7 @@ void Shader::Init(const std::string& filename)
 	}
 
 	glBindAttribLocation(program, 0, "position"); // associate attribute variable with our shader program attribute (in this case attribute vec3 position;)
-	glBindAttribLocation(program, 1, "texCoord"); 
+	glBindAttribLocation(program, 1, "texCoord");
 	glBindAttribLocation(program, 2, "normals");
 
 	glLinkProgram(program); //create executables that will run on the GPU shaders

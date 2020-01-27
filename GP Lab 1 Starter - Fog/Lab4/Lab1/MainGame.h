@@ -25,6 +25,7 @@ private:
 	void gameLoop();
 	void drawGame();
 	bool collision(glm::vec3 m1Pos, float m1Rad, glm::vec3 m2Pos, float m2Rad);
+	void setFogShaderVariables();
 	//void playAudio(unsigned int Source, glm::vec3 pos);
 
 	Display _gameDisplay;

@@ -85,6 +85,19 @@ bool MainGame::collision(glm::vec3 m1Pos, float m1Rad, glm::vec3 m2Pos, float m2
 	}
 }
 
+void MainGame::setFogShaderVariables()
+{
+	//fog.setVec3("lightDir", glm::vec3(0.5, 0.5, 0.5));
+
+	//fog.setMat4("u_vm", myCamera.GetView());
+	//fog.setMat4("u_pm", myCamera.GetProjection());
+
+	fog.setVec3("fogColor", glm::vec3(0.2, 0.2, 0.2));
+	fog.setFloat("minDist", -5.0f);
+	fog.setFloat("maxDist", 5.0f);
+
+}
+
 //void MainGame::playAudio(unsigned int Source, glm::vec3 pos)
 //{
 //	
@@ -106,6 +119,8 @@ bool MainGame::collision(glm::vec3 m1Pos, float m1Rad, glm::vec3 m2Pos, float m2
 void MainGame::drawGame()
 {
 	_gameDisplay.clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
+
+	setFogShaderVariables();
 	
 	Texture texture("..\\res\\bricks.jpg"); //load texture
 	Texture texture1("..\\res\\water.jpg"); //load texture
@@ -124,6 +139,8 @@ void MainGame::drawGame()
 	transform.SetPos(glm::vec3(-sinf(counter), -0.5, -sinf(counter)*5));
 	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
+
+	fog.Update(transform, myCamera);
 
 	texture.Bind(0);
 	mesh2.draw();

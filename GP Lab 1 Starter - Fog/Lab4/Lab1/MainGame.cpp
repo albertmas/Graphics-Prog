@@ -92,9 +92,9 @@ void MainGame::setFogShaderVariables()
 	//fog.setMat4("u_vm", myCamera.GetView());
 	//fog.setMat4("u_pm", myCamera.GetProjection());
 
-	fog.setVec3("fogColor", glm::vec3(0.2, 0.2, 0.2));
-	fog.setFloat("minDist", -5.0f);
-	fog.setFloat("maxDist", 5.0f);
+	fog.setVec3("fogColor", glm::vec3(0.0, 0.0, 0.0));
+	fog.setFloat("minDist", 0.0f);
+	fog.setFloat("maxDist", 20.0f);
 
 }
 
@@ -136,7 +136,7 @@ void MainGame::drawGame()
 	mesh1.updateSphereData(*transform.GetPos(), 0.62f);
 	
 
-	transform.SetPos(glm::vec3(-sinf(counter), -0.5, -sinf(counter)*5));
+	transform.SetPos(glm::vec3(-sinf(counter), -0.5, 10 -sinf(counter)*15));
 	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 

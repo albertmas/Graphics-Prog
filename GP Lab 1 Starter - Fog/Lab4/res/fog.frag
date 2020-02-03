@@ -15,11 +15,11 @@ uniform float minDist; //fog min distance
 
 void main() 
 {
-	float dist = abs( v_pos.z );
+	float dist = abs(v_pos.z);
 	float fogFactor = (maxDist - dist) / (maxDist - minDist);
-	fogFactor = clamp( fogFactor, 0.0, 1.0 );
+	fogFactor = clamp(fogFactor, 0.0, 1.0);
 	vec3 lightColor = vec3(0.1,0.1,0.1);
-	vec3 color = mix( fogColor, lightColor, fogFactor);
+	vec3 color = mix(fogColor, lightColor, fogFactor);
 
 	FragColor = vec4(color, 1.0);
 }

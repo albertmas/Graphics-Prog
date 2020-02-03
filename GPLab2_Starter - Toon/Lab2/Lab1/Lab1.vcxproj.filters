@@ -82,6 +82,12 @@
     <None Include="..\res\fogShader.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\res\shaderToon.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\res\shaderToon.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\res\monkey3.obj">

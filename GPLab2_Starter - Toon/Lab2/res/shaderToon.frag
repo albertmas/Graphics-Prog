@@ -1,3 +1,5 @@
+#version 400
+
 uniform vec3 lightDir;
 varying vec3 normal;
 
@@ -5,7 +7,7 @@ void main()
 {
 	float intensity;
 	vec4 color;
-	intensity = dot(lightDir,normal);
+	intensity = dot(lightDir, normal);
 
 	if (intensity > 0.95)
 		color = vec4(1.0,0.5,0.5,1.0);

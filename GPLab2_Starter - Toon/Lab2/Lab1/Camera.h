@@ -38,6 +38,11 @@ public:
 		return glm::lookAt(pos, pos + forward, up);
 	}
 
+	inline glm::vec3 getForward() const
+	{
+		return forward;
+	}
+
 	//void MoveForward(float amt)
 	//{
 	//	pos += forward * amt;

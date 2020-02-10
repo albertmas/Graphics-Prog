@@ -34,9 +34,10 @@ void MainGame::initSystems()
 	
 	mesh1.loadModel("..\\res\\monkey3.obj");
 	mesh2.loadModel("..\\res\\monkey3.obj");
-	//fogShader.init("..\\res\\fogShader.vert", "..\\res\\fogShader.frag"); //new shader
-	//toonShader.init("..\\res\\shaderToon.vert", "..\\res\\shaderToon.frag"); //new shader
-	fogToonShader.init("..\\res\\shaderFogToon.vert", "..\\res\\shaderFogToon.frag"); //new shader
+	//fogShader.init("..\\res\\fogShader.vert", "..\\res\\fogShader.frag"); //Lab1 shader
+	//toonShader.init("..\\res\\shaderToon.vert", "..\\res\\shaderToon.frag"); //Lab2 shader
+	//fogToonShader.init("..\\res\\shaderFogToon.vert", "..\\res\\shaderFogToon.frag"); //Lab1 + Lab2 shader
+	rimLightingShader.init("..\\res\\shaderRimLighting.vert", "..\\res\\shaderRimLighting.frag"); //Lab3 shader
 
 	
 	myCamera.initCamera(glm::vec3(0, 0, -5), 70.0f, (float)_gameDisplay.getWidth()/_gameDisplay.getHeight(), 0.01f, 1000.0f);
@@ -128,12 +129,19 @@ void MainGame::linkFogToonShader()
 	fogToonShader.setVec3("fogColor", glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
+void MainGame::linkRimLightingShader()
+{
+	glm::vec3 direction = myCamera.getPos() - myCamera.getForward();
+	rimLightingShader.setVec3("viewDir", direction);
+}
+
 void MainGame::drawGame()
 {
 	_gameDisplay.clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
 	//linkFogShader();
 	//linkToonShader();
-	linkFogToonShader();
+	//linkFogToonShader();
+	linkRimLightingShader();
 	Texture texture("..\\res\\bricks.jpg"); //load texture
 	Texture texture1("..\\res\\water.jpg"); //load texture
 	
@@ -143,11 +151,13 @@ void MainGame::drawGame()
 
 	//fogShader.Bind();
 	//toonShader.Bind();
-	fogToonShader.Bind();
+	//fogToonShader.Bind();
+	rimLightingShader.Bind();
 	texture.Bind(0);
 	//fogShader.Update(transform, myCamera);
 	//toonShader.Update(transform, myCamera);
-	fogToonShader.Update(transform, myCamera);
+	//fogToonShader.Update(transform, myCamera);
+	rimLightingShader.Update(transform, myCamera);
 	mesh1.draw();
 	mesh1.updateSphereData(*transform.GetPos(), 0.62f);
 	
@@ -158,7 +168,8 @@ void MainGame::drawGame()
 
 	//fogShader.Update(transform, myCamera);
 	//toonShader.Update(transform, myCamera);
-	fogToonShader.Update(transform, myCamera);
+	//fogToonShader.Update(transform, myCamera);
+	rimLightingShader.Update(transform, myCamera);
 	mesh2.draw();
 	mesh2.updateSphereData(*transform.GetPos(), 0.62f);
 	counter = counter + 0.02f;

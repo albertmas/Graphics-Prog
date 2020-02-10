@@ -35,7 +35,8 @@ void MainGame::initSystems()
 	mesh1.loadModel("..\\res\\monkey3.obj");
 	mesh2.loadModel("..\\res\\monkey3.obj");
 	//fogShader.init("..\\res\\fogShader.vert", "..\\res\\fogShader.frag"); //new shader
-	toonShader.init("..\\res\\shaderToon.vert", "..\\res\\shaderToon.frag"); //new shader
+	//toonShader.init("..\\res\\shaderToon.vert", "..\\res\\shaderToon.frag"); //new shader
+	fogToonShader.init("..\\res\\shaderFogToon.vert", "..\\res\\shaderFogToon.frag"); //new shader
 
 	
 	myCamera.initCamera(glm::vec3(0, 0, -5), 70.0f, (float)_gameDisplay.getWidth()/_gameDisplay.getHeight(), 0.01f, 1000.0f);
@@ -118,11 +119,21 @@ void MainGame::linkToonShader()
 {
 	toonShader.setVec3("lightDir", glm::vec3(0.3f, 0.3f, 0.3f));
 }
+
+void MainGame::linkFogToonShader()
+{
+	fogToonShader.setVec3("lightDir", glm::vec3(0.3f, 0.3f, 0.3f));
+	fogToonShader.setFloat("maxDist", 20.0f);
+	fogToonShader.setFloat("minDist", 0.0f);
+	fogToonShader.setVec3("fogColor", glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
 void MainGame::drawGame()
 {
 	_gameDisplay.clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
 	//linkFogShader();
-	linkToonShader();
+	//linkToonShader();
+	linkFogToonShader();
 	Texture texture("..\\res\\bricks.jpg"); //load texture
 	Texture texture1("..\\res\\water.jpg"); //load texture
 	
@@ -131,10 +142,12 @@ void MainGame::drawGame()
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
 	//fogShader.Bind();
-	toonShader.Bind();
+	//toonShader.Bind();
+	fogToonShader.Bind();
 	texture.Bind(0);
 	//fogShader.Update(transform, myCamera);
-	toonShader.Update(transform, myCamera);
+	//toonShader.Update(transform, myCamera);
+	fogToonShader.Update(transform, myCamera);
 	mesh1.draw();
 	mesh1.updateSphereData(*transform.GetPos(), 0.62f);
 	
@@ -144,7 +157,8 @@ void MainGame::drawGame()
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
 	//fogShader.Update(transform, myCamera);
-	toonShader.Update(transform, myCamera);
+	//toonShader.Update(transform, myCamera);
+	fogToonShader.Update(transform, myCamera);
 	mesh2.draw();
 	mesh2.updateSphereData(*transform.GetPos(), 0.62f);
 	counter = counter + 0.02f;

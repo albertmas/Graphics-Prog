@@ -26,6 +26,7 @@ private:
 	void drawGame();
 	void linkFogShader();
 	void linkToonShader();
+	void linkFogToonShader();
 	bool collision(glm::vec3 m1Pos, float m1Rad, glm::vec3 m2Pos, float m2Rad);
 	//void playAudio(unsigned int Source, glm::vec3 pos);
 
@@ -36,6 +37,7 @@ private:
 	Camera myCamera;
 	Shader fogShader;
 	Shader toonShader;
+	Shader fogToonShader;
 	//Audio audioDevice;
 
 	float counter;

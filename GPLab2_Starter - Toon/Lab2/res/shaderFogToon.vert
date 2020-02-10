@@ -3,10 +3,10 @@
 layout (location = 0) in vec3 VertexPosition;
 layout (location = 2) in vec3 VertexNormal;
 
-uniform mat4 transform;
-
 out vec3 v_norm;
-out vec4 v_pos;
+out vec4 v_pos; 
+
+uniform mat4 transform;
 
 void main()
 {

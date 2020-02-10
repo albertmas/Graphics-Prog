@@ -98,6 +98,8 @@
   <ItemGroup>
     <None Include="..\res\fogShader.frag" />
     <None Include="..\res\fogShader.vert" />
+    <None Include="..\res\shaderFogToon.frag" />
+    <None Include="..\res\shaderFogToon.vert" />
     <None Include="..\res\shaderToon.frag" />
     <None Include="..\res\shaderToon.vert" />
   </ItemGroup>

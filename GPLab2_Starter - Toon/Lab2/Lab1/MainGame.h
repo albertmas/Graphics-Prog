@@ -29,6 +29,7 @@ private:
 	void linkFogToonShader();
 	void linkRimLightingShader();
 	void linkFogToonRimShader();
+	void linkGeoTextShader();
 	bool collision(glm::vec3 m1Pos, float m1Rad, glm::vec3 m2Pos, float m2Rad);
 	//void playAudio(unsigned int Source, glm::vec3 pos);
 
@@ -42,6 +43,7 @@ private:
 	Shader fogToonShader;
 	Shader rimLightingShader;
 	Shader fogToonRimShader;
+	Shader geoTextShader;
 	//Audio audioDevice;
 
 	float counter;

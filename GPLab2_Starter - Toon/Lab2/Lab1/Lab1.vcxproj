@@ -102,6 +102,9 @@
     <None Include="..\res\shaderFogToon.vert" />
     <None Include="..\res\shaderFogToonRim.frag" />
     <None Include="..\res\shaderFogToonRim.vert" />
+    <None Include="..\res\shaderGeoText.frag" />
+    <None Include="..\res\shaderGeoText.geom" />
+    <None Include="..\res\shaderGeoText.vert" />
     <None Include="..\res\shaderRimLighting.frag" />
     <None Include="..\res\shaderRimLighting.vert" />
     <None Include="..\res\shaderToon.frag" />

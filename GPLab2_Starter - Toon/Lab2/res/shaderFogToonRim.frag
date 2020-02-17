@@ -7,18 +7,19 @@ in vec4 v_pos;
 uniform vec3 viewDir;
 
 uniform vec3 lightDir;
-uniform vec3 fogColor;
+uniform vec4 fogColor;
 
 uniform float maxDist;
 uniform float minDist;
 
 void main()
 {
+	float rim = 1.0 - dot(viewDir, v_norm);
+	float s = smoothstep(0.0, 1.0, rim);
+	vec4 lightColor = vec4(vec3(s), 1.0);
+
 	//Calculate fog color
-	float dist = abs(v_pos.z);
-	float fogFactor = (maxDist - dist) / (maxDist - minDist);
-	fogFactor = clamp(fogFactor, 0.0, 1.0);
-	vec3 lightColor = vec3(0.5,0.0,0.0);
+	
 	
 
 	//Calculate toon color
@@ -35,11 +36,14 @@ void main()
 	else
 		color = vec4(0.2,0.1,0.1,1.0);
 
-	vec4 finalcolor = mix(vec4(fogColor, 1.0), color, fogFactor);
+	vec4 finalcolor = mix(lightColor, color, 0.5);
+
+	//Calculate rim lighting
+	
+	float dist = abs(v_pos.z);
+	float fogFactor = (maxDist - dist) / (maxDist - minDist);
+	fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 
-	float rim = 1.0 - dot(viewDir, v_norm);
-	float s = smoothstep(0.0, 1.0, rim);
-
-	FragColor = mix(vec4(vec3(s), 1.0), finalcolor, 1);
+	FragColor = mix(fogColor, finalcolor, fogFactor);
 }

@@ -138,12 +138,12 @@ void MainGame::linkRimLightingShader()
 
 void MainGame::linkFogToonRimShader()
 {
+	glm::vec3 direction = myCamera.getPos() - myCamera.getForward();
+	fogToonRimShader.setVec3("viewDir", direction);
 	fogToonRimShader.setVec3("lightDir", glm::vec3(0.3f, 0.3f, 0.3f));
 	fogToonRimShader.setFloat("maxDist", 20.0f);
 	fogToonRimShader.setFloat("minDist", 0.0f);
-	fogToonRimShader.setVec3("fogColor", glm::vec3(0.0f, 0.0f, 0.0f));
-	glm::vec3 direction = myCamera.getPos() - myCamera.getForward();
-	fogToonRimShader.setVec3("viewDir", direction);
+	fogToonRimShader.setVec4("fogColor", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 }
 
 void MainGame::drawGame()

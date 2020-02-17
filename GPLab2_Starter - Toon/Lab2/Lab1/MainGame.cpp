@@ -12,7 +12,7 @@ MainGame::MainGame()
 	Display* _gameDisplay = new Display(); //new display
     Mesh* mesh1();
 	Mesh* mesh2();
-	Shader fogShader();
+	Shader fogToonRimShader();
 	//Audio* audioDevice();
 }
 
@@ -37,7 +37,8 @@ void MainGame::initSystems()
 	//fogShader.init("..\\res\\fogShader.vert", "..\\res\\fogShader.frag"); //Lab1 shader
 	//toonShader.init("..\\res\\shaderToon.vert", "..\\res\\shaderToon.frag"); //Lab2 shader
 	//fogToonShader.init("..\\res\\shaderFogToon.vert", "..\\res\\shaderFogToon.frag"); //Lab1 + Lab2 shader
-	rimLightingShader.init("..\\res\\shaderRimLighting.vert", "..\\res\\shaderRimLighting.frag"); //Lab3 shader
+	//rimLightingShader.init("..\\res\\shaderRimLighting.vert", "..\\res\\shaderRimLighting.frag"); //Lab3 shader
+	fogToonRimShader.init("..\\res\\shaderFogToonRim.vert", "..\\res\\shaderFogToonRim.frag"); //Lab1 + Lab2 + Lab3 shader
 
 	
 	myCamera.initCamera(glm::vec3(0, 0, -5), 70.0f, (float)_gameDisplay.getWidth()/_gameDisplay.getHeight(), 0.01f, 1000.0f);
@@ -135,13 +136,20 @@ void MainGame::linkRimLightingShader()
 	rimLightingShader.setVec3("viewDir", direction);
 }
 
+void MainGame::linkFogToonRimShader()
+{
+	fogToonRimShader.setVec3("lightDir", glm::vec3(0.3f, 0.3f, 0.3f));
+	fogToonRimShader.setFloat("maxDist", 20.0f);
+	fogToonRimShader.setFloat("minDist", 0.0f);
+	fogToonRimShader.setVec3("fogColor", glm::vec3(0.0f, 0.0f, 0.0f));
+	glm::vec3 direction = myCamera.getPos() - myCamera.getForward();
+	fogToonRimShader.setVec3("viewDir", direction);
+}
+
 void MainGame::drawGame()
 {
 	_gameDisplay.clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
-	//linkFogShader();
-	//linkToonShader();
-	//linkFogToonShader();
-	linkRimLightingShader();
+	linkFogToonRimShader();
 	Texture texture("..\\res\\bricks.jpg"); //load texture
 	Texture texture1("..\\res\\water.jpg"); //load texture
 	
@@ -149,15 +157,9 @@ void MainGame::drawGame()
 	transform.SetRot(glm::vec3(0.0, counter, 0.0));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
-	//fogShader.Bind();
-	//toonShader.Bind();
-	//fogToonShader.Bind();
-	rimLightingShader.Bind();
+	fogToonRimShader.Bind(); // Bind shader
 	texture.Bind(0);
-	//fogShader.Update(transform, myCamera);
-	//toonShader.Update(transform, myCamera);
-	//fogToonShader.Update(transform, myCamera);
-	rimLightingShader.Update(transform, myCamera);
+	fogToonRimShader.Update(transform, myCamera); // Apply shader to mesh 1
 	mesh1.draw();
 	mesh1.updateSphereData(*transform.GetPos(), 0.62f);
 	
@@ -166,10 +168,7 @@ void MainGame::drawGame()
 	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
-	//fogShader.Update(transform, myCamera);
-	//toonShader.Update(transform, myCamera);
-	//fogToonShader.Update(transform, myCamera);
-	rimLightingShader.Update(transform, myCamera);
+	fogToonRimShader.Update(transform, myCamera); // Apply shader to mesh 2
 	mesh2.draw();
 	mesh2.updateSphereData(*transform.GetPos(), 0.62f);
 	counter = counter + 0.02f;

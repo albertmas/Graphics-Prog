@@ -100,6 +100,12 @@
     <None Include="..\res\shaderRimLighting.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\res\shaderFogToonRim.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\res\shaderFogToonRim.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\res\monkey3.obj">

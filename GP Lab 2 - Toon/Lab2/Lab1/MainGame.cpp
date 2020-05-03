@@ -36,10 +36,11 @@ void MainGame::initSystems()
 	mesh2.loadModel("..\\res\\monkey3.obj");
 	//fogShader.init("..\\res\\fogShader.vert", "..\\res\\fogShader.frag"); //Lab1 shader
 	//toonShader.init("..\\res\\shaderToon.vert", "..\\res\\shaderToon.frag"); //Lab2 shader
-	//fogToonShader.init("..\\res\\shaderFogToon.vert", "..\\res\\shaderFogToon.frag"); //Lab1 + Lab2 shader
+	fogToonShader.init("..\\res\\shaderFogToon.vert", "..\\res\\shaderFogToon.frag"); //Lab1 + Lab2 shader
 	//rimLightingShader.init("..\\res\\shaderRimLighting.vert", "..\\res\\shaderRimLighting.frag"); //Lab3 shader
 	//fogToonRimShader.init("..\\res\\shaderFogToonRim.vert", "..\\res\\shaderFogToonRim.frag"); //Lab1 + Lab2 + Lab3 shader
 	geoTextShader.init("..\\res\\shaderGeoText.vert", "..\\res\\shaderGeoText.geom", "..\\res\\shaderGeoText.frag"); //Lab5 shader
+	explosionShader.init("..\\res\\shaderExplosion.vert", "..\\res\\shaderExplosion.geom", "..\\res\\shaderExplosion.frag"); //Lab5 shader
 
 	
 	myCamera.initCamera(glm::vec3(0, 0, -5), 70.0f, (float)_gameDisplay.getWidth()/_gameDisplay.getHeight(), 0.01f, 1000.0f);
@@ -155,29 +156,37 @@ void MainGame::linkGeoTextShader()
 	geoTextShader.setFloat("randColourZ", rand() % 10 * 0.1f);
 }
 
+void MainGame::linkExplosionShader()
+{
+	explosionShader.setFloat("time", counter);
+}
+
 void MainGame::drawGame()
 {
 	_gameDisplay.clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
-	linkGeoTextShader();
+
 	Texture texture("..\\res\\bricks.jpg"); //load texture
 	Texture texture1("..\\res\\water.jpg"); //load texture
 	
-	transform.SetPos(glm::vec3(sinf(counter), 0.5, 0.0));
-	transform.SetRot(glm::vec3(0.0, counter, 0.0));
+	transform.SetPos(glm::vec3(sinf(counter), 1.0, 1.5));
+	transform.SetRot(glm::vec3(0.0, 0.0, 0.0));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
-	geoTextShader.Bind(); // Bind shader
+	explosionShader.Bind(); // Bind shader
+	linkExplosionShader();
+	explosionShader.Update(transform, myCamera); // Apply shader to mesh 1
 	texture.Bind(0);
-	geoTextShader.Update(transform, myCamera); // Apply shader to mesh 1
 	mesh1.draw();
 	mesh1.updateSphereData(*transform.GetPos(), 0.62f);
 	
 
-	transform.SetPos(glm::vec3(-sinf(counter), -0.5, 10.0 +(-sinf(counter)*8)));
+	transform.SetPos(glm::vec3(-sinf(counter), -0.5, 10.0 + (-sinf(counter) * 8)));
 	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
 	transform.SetScale(glm::vec3(0.6, 0.6, 0.6));
 
-	geoTextShader.Update(transform, myCamera); // Apply shader to mesh 2
+	fogToonShader.Bind(); // Bind shader
+	linkFogToonShader();
+	fogToonShader.Update(transform, myCamera); // Apply shader to mesh 2
 	mesh2.draw();
 	mesh2.updateSphereData(*transform.GetPos(), 0.62f);
 	counter = counter + 0.02f;
@@ -187,4 +196,4 @@ void MainGame::drawGame()
 	glEnd();
 
 	_gameDisplay.swapBuffer();
-} 
+}

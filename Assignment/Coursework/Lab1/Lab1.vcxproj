@@ -99,23 +99,13 @@
   <ItemGroup>
     <None Include="..\res\shader.frag" />
     <None Include="..\res\shader.vert" />
-    <None Include="..\res\shaderBlur.frag" />
-    <None Include="..\res\shaderBlur.vert" />
     <None Include="..\res\shaderExplosion.frag" />
     <None Include="..\res\shaderExplosion.geom" />
     <None Include="..\res\shaderExplosion.vert" />
     <None Include="..\res\shaderFogToonRim.frag" />
     <None Include="..\res\shaderFogToonRim.vert" />
-    <None Include="..\res\shaderOL.frag" />
-    <None Include="..\res\shaderOL.vert" />
     <None Include="..\res\shaderReflection.frag" />
     <None Include="..\res\shaderReflection.vert" />
-    <None Include="..\res\shaderRim.frag" />
-    <None Include="..\res\shaderRim.vert" />
-    <None Include="..\res\shaderRimToon.frag" />
-    <None Include="..\res\shaderRimToon.vert" />
-    <None Include="..\res\shaderToon.frag" />
-    <None Include="..\res\shaderToon.vert" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\res\monkey3.obj">

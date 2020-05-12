@@ -88,36 +88,6 @@
     <None Include="..\res\shader.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\res\shaderOL.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderOL.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderBlur.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderBlur.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderToon.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderToon.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderRim.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderRim.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderRimToon.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\res\shaderRimToon.vert">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="..\res\shaderReflection.frag">
       <Filter>Resource Files</Filter>
     </None>

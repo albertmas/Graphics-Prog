@@ -46,7 +46,6 @@ private:
 	Mesh mesh3;
 
 	Texture texture;
-	Texture texture1;
 	Texture skybox;
 
 	Overlay overlay;

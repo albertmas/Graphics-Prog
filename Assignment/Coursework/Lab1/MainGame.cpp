@@ -38,8 +38,8 @@ void MainGame::run()
 void MainGame::initSystems()
 {
 	_gameDisplay.initDisplay(); 
-	whistle = audioDevice.loadSound("..\\res\\bang.wav");
-	backGroundMusic = audioDevice.loadSound("..\\res\\background.wav");
+	//whistle = audioDevice.loadSound("..\\res\\bang.wav");
+	//backGroundMusic = audioDevice.loadSound("..\\res\\background.wav");
 	texture.init("..\\res\\stone.jpg"); //load texture
 
 
@@ -132,7 +132,7 @@ void MainGame::gameLoop()
 	{
 		processInput();
 		drawGame();
-		playAudio(backGroundMusic, glm::vec3(0.0f,0.0f,0.0f));
+		//playAudio(backGroundMusic, glm::vec3(0.0f,0.0f,0.0f));
 	}
 }
 
@@ -169,54 +169,22 @@ void MainGame::Skybox()
 	glDepthFunc(GL_LESS); // set depth function back to default
 }
 
-void MainGame::playAudio(unsigned int Source, glm::vec3 pos)
-{
-	
-	ALint state; 
-	alGetSourcei(Source, AL_SOURCE_STATE, &state);
-	/*
-	Possible values of state
-	AL_INITIAL
-	AL_STOPPED
-	AL_PLAYING
-	AL_PAUSED
-	*/
-	if (AL_PLAYING != state)
-	{
-		//audioDevice.playSound(Source, pos);
-	}
-}
-
-//void MainGame::setADSLighting()
+//void MainGame::playAudio(unsigned int Source, glm::vec3 pos)
 //{
-//	modelView = transform.GetModel() * myCamera.GetView();
 //	
-//	shaderPass.setMat4("ModelViewMatrix", modelView);
-//	shaderPass.setMat4("ProjectionMatrix", myCamera.GetProjection()); 
-//	
-//	glm::mat4 normalMatrix = transpose(inverse(modelView));
-//	
-//	shaderPass.setMat4("NormalMatrix", normalMatrix);
-//
-//	shaderPass.setVec4("Position", glm::vec4(10.0,10.0,10.0,1.0));
-//	shaderPass.setVec3("Intensity", glm::vec3(0.0, 0.0, 0.0));
-//
-//	shaderPass.setVec3("ka", glm::vec3(0.5, 0.5, 0.5));
-//	shaderPass.setVec3("kd", glm::vec3(0.5, 0.5, 0.5));
-//	shaderPass.setVec3("ks", glm::vec3(0.5, 0.5, 0.5));
-//
-//	shaderPass.setFloat("Shininess", 0.5);
-//}
-//
-//void MainGame::setToonLighting()
-//{
-//	shaderToon.setVec3("lightDir", glm::vec3(0.5, 0.5, 0.5));
-//}
-//
-//void MainGame::setRimShader()
-//{
-//	shaderRim.setMat4("u_vm", myCamera.GetView());
-//	shaderRim.setMat4("u_pm", myCamera.GetProjection());
+//	ALint state; 
+//	alGetSourcei(Source, AL_SOURCE_STATE, &state);
+//	/*
+//	Possible values of state
+//	AL_INITIAL
+//	AL_STOPPED
+//	AL_PLAYING
+//	AL_PAUSED
+//	*/
+//	if (AL_PLAYING != state)
+//	{
+//		//audioDevice.playSound(Source, pos);
+//	}
 //}
 
 void MainGame::setFogToonRimShader()
@@ -247,51 +215,6 @@ void MainGame::setReflectionShader()
 	shaderReflection.setMat4("projection", myCamera.GetProjection());
 }
 
-
-//void MainGame::blobEffect()
-//{
-//	GLuint blockIndex = glGetUniformBlockIndex(shaderBlur.getProgram(), "BlobSettings");
-//
-//	GLint blockSize;
-//	glGetActiveUniformBlockiv(shaderBlur.getProgram(), blockIndex,
-//		GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize); //get information about blobsettings and save it in blockSize
-//
-//	GLubyte * blockBuffer = (GLubyte *)malloc(blockSize); //allocates the requested memory and returns a pointer to it.
-//
-//														  // Query for the offsets of each block variable
-//	const GLchar *names[] = { "InnerColor", "OuterColor",
-//		"RadiusInner", "RadiusOuter" };
-//
-//	GLuint indices[4];
-//	glGetUniformIndices(shaderBlur.getProgram(), 4, names, indices); // glGetUniformIndices retrieves the indices of a number of uniforms within program
-//
-//	GLint offset[4];
-//	glGetActiveUniformsiv(shaderBlur.getProgram(), 4, indices, GL_UNIFORM_OFFSET, offset); //Returns information about several active uniform variables for the specified program object
-//
-//	GLfloat outerColor[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-//	GLfloat innerColor[] = { 1.0f, 1.0f, 0.75f, 1.0f };
-//
-//	GLfloat innerRadius = 0.0f, outerRadius = 3.0f;
-//
-//	memcpy(blockBuffer + offset[0], innerColor,
-//		4 * sizeof(GLfloat)); //destination, source, no of bytes. 
-//	memcpy(blockBuffer + offset[1], outerColor,
-//		4 * sizeof(GLfloat));
-//	memcpy(blockBuffer + offset[2], &innerRadius,
-//		sizeof(GLfloat));
-//	memcpy(blockBuffer + offset[3], &outerRadius,
-//		sizeof(GLfloat));
-//
-//	GLuint uboHandle;
-//
-//	glGenBuffers(1, &uboHandle);
-//
-//	glBindBuffer(GL_UNIFORM_BUFFER, uboHandle);
-//	glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer,
-//		GL_DYNAMIC_DRAW); //creates and initializes a buffer object's data store - targer, size, data, usage
-//
-//	glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, uboHandle); // bind a buffer object to an indexed buffer target - trager, index, buffer
-//}
 
 void MainGame::drawGame()
 {
